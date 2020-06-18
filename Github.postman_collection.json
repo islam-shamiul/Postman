@@ -1,0 +1,155 @@
+{
+	"info": {
+		"_postman_id": "3b41a21e-8bd7-45fe-b534-5f79990d00fe",
+		"name": "Github",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get repos with basic auth",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "aA1bB2cC3@@@",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "islam-shamiul",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-GitHub-OTP",
+						"value": "{{otpCode}}",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "https://api.github.com/user/repos",
+					"protocol": "https",
+					"host": [
+						"api",
+						"github",
+						"com"
+					],
+					"path": [
+						"user",
+						"repos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "otp caller",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "aA1bB2cC3@@@",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "islam-shamiul",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://api.github.com/authorizations",
+					"protocol": "https",
+					"host": [
+						"api",
+						"github",
+						"com"
+					],
+					"path": [
+						"authorizations"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "creating a repo",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "aA1bB2cC3@@@",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "islam-shamiul",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Test_repo\",\r\n  \"description\": \"This is your first repository\"\r\n  \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.github.com/user/repos",
+					"protocol": "https",
+					"host": [
+						"api",
+						"github",
+						"com"
+					],
+					"path": [
+						"user",
+						"repos"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "test_repo",
+							"disabled": true
+						},
+						{
+							"key": "description",
+							"value": "fafdffhfdgfngd",
+							"disabled": true
+						},
+						{
+							"key": "license_template\t",
+							"value": "license_template",
+							"disabled": true
+						},
+						{
+							"key": "homepage",
+							"value": "https://github.com/islam-shamiul/test_repo",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

@@ -1,0 +1,52 @@
+{
+	"info": {
+		"_postman_id": "5587717c-4875-435f-8e70-aa1544edbf02",
+		"name": "2nd class",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "hookbin",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-Do-Not-Track",
+						"value": "1",
+						"type": "text"
+					},
+					{
+						"key": "My-Own",
+						"value": "foo",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "file",
+					"file": {},
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://hookb.in/XkEkammgXoTd2KGK3PMN",
+					"protocol": "https",
+					"host": [
+						"hookb",
+						"in"
+					],
+					"path": [
+						"XkEkammgXoTd2KGK3PMN"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

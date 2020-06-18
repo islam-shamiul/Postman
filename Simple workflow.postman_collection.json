@@ -1,0 +1,159 @@
+{
+	"info": {
+		"_postman_id": "775fb6f0-a75a-4dd9-aaaf-d5649c4ab25a",
+		"name": "Simple workflow",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Request 1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "bd1f351b-d598-4b72-a35a-3ea24bffc74b",
+						"type": "text/javascript",
+						"exec": [
+							"postman.setNextRequest(\"Request 3\");",
+							""
+						]
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "9a2169f4-25dd-42f6-a6e7-7f1e465990ec",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "example.com",
+					"host": [
+						"example",
+						"com"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Request 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2a73439e-a15a-4781-8d09-0bba5ba53079",
+						"exec": [
+							"if (pm.globals.get(\"runedOnce\")) {",
+							"    postman.setNextRequest(null);",
+							"}",
+							"else{",
+							"    postman.setNextRequest(\"Request 3\")",
+							"}",
+							"pm.globals.set(\"runedOnce\", 1);",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "example.com",
+					"host": [
+						"example",
+						"com"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Request 3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "1b98dc22-28e4-47aa-b7b1-d9557d775182",
+						"type": "text/javascript",
+						"exec": [
+							"postman.setNextRequest(\"Request 2\");"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "example.com",
+					"host": [
+						"example",
+						"com"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Request 4",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3da85542-8ba9-493d-bbb2-c05eb489a5ef",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "example.com",
+					"host": [
+						"example",
+						"com"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "1e386ecf-5218-43ba-b034-0f76d22ee847",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "9ed94945-3772-473a-85b0-5b8dd6355458",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
