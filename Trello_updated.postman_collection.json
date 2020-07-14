@@ -358,11 +358,51 @@
 		},
 		{
 			"name": "Delet the board",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f5dee6c2-c67b-42ad-8356-d365beb6cd23",
+						"exec": [
+							"pm.globals.unset(\"boardid\");\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
-				"method": "GET",
+				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": ""
+					"raw": "https://api.trello.com/1/boards/::id?key={{key}}&token={{token}}",
+					"protocol": "https",
+					"host": [
+						"api",
+						"trello",
+						"com"
+					],
+					"path": [
+						"1",
+						"boards",
+						"::id"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "{{key}}"
+						},
+						{
+							"key": "token",
+							"value": "{{token}}"
+						}
+					],
+					"variable": [
+						{
+							"key": ":id",
+							"value": "{{boardid}}"
+						}
+					]
 				}
 			},
 			"response": []
