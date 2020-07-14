@@ -1,0 +1,437 @@
+{
+	"info": {
+		"_postman_id": "3b41a21e-8bd7-45fe-b534-5f79990d00fe",
+		"name": "Github",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "otp caller",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "aA1bB2cC3@@@",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "islam-shamiul",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://api.github.com/authorizations",
+					"protocol": "https",
+					"host": [
+						"api",
+						"github",
+						"com"
+					],
+					"path": [
+						"authorizations"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET sms",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5509758b-f7d9-4715-b1a8-b80988d0c035",
+						"exec": [
+							"const response = pm.response.json()\r",
+							"\r",
+							"const otp = response.messages[0].body.substring(0,6)\r",
+							" \r",
+							"pm.environment.set(\"otpCode\", otp);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{twilioPass}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "{{twilioUser}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.twilio.com/2010-04-01/Accounts/::account/Messages.json",
+					"protocol": "https",
+					"host": [
+						"api",
+						"twilio",
+						"com"
+					],
+					"path": [
+						"2010-04-01",
+						"Accounts",
+						"::account",
+						"Messages.json"
+					],
+					"variable": [
+						{
+							"key": ":account",
+							"value": "{{twilioAccName}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get repos with otp",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "aA1bB2cC3@@@",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "islam-shamiul",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-GitHub-OTP",
+						"value": "{{otpCode}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://api.github.com/user/repos",
+					"protocol": "https",
+					"host": [
+						"api",
+						"github",
+						"com"
+					],
+					"path": [
+						"user",
+						"repos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "creating a repo",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "68ff2896-e33f-44ae-b710-0eb16dd67df8",
+						"exec": [
+							"const response = pm.response.json()\r",
+							"\r",
+							"pm.environment.set(\"repo\", response.name);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "aA1bB2cC3@@@",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "islam-shamiul",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-GitHub-OTP",
+						"value": "{{otpCode}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Test_repo\",\r\n  \"description\": \"This is your first repository\"\r\n  \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.github.com/user/repos",
+					"protocol": "https",
+					"host": [
+						"api",
+						"github",
+						"com"
+					],
+					"path": [
+						"user",
+						"repos"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "test_repo",
+							"disabled": true
+						},
+						{
+							"key": "description",
+							"value": "fafdffhfdgfngd",
+							"disabled": true
+						},
+						{
+							"key": "license_template\t",
+							"value": "license_template",
+							"disabled": true
+						},
+						{
+							"key": "homepage",
+							"value": "https://github.com/islam-shamiul/test_repo",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "creating issue",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{gitPass}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "{{gitUserName}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-GitHub-OTP",
+						"value": "{{otpCode}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"title\": \"Found a bug\",\r\n  \"body\": \"I'm having a problem with this.\"\r\n  \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.github.com/repos/:owner/:repo/issues",
+					"protocol": "https",
+					"host": [
+						"api",
+						"github",
+						"com"
+					],
+					"path": [
+						"repos",
+						":owner",
+						":repo",
+						"issues"
+					],
+					"variable": [
+						{
+							"key": "owner",
+							"value": "{{gitUserName}}"
+						},
+						{
+							"key": "repo",
+							"value": "{{repo}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get issue",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8bd26857-abc5-4991-96d1-35727d9d5e2c",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"const response = pm.response.json();",
+							"",
+							"pm.test(\"Check issue title\", function () {",
+							"    pm.expect(response.title).to.eql(\"Found a bug\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{githubPassword}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "{{githubUsername}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "X-GitHub-OTP",
+						"value": "{{otpCode}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"title\": \"Found a bug\",\n  \"body\": \"I'm having a problem with this.\"\n}"
+				},
+				"url": {
+					"raw": "https://api.github.com/repos/:owner/:repo/issues/1",
+					"protocol": "https",
+					"host": [
+						"api",
+						"github",
+						"com"
+					],
+					"path": [
+						"repos",
+						":owner",
+						":repo",
+						"issues",
+						"1"
+					],
+					"variable": [
+						{
+							"key": "owner",
+							"value": "{{githubUsername}}"
+						},
+						{
+							"key": "repo",
+							"value": "{{repoName}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delet the repo",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{gitPass}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "{{gitUserName}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "X-GitHub-OTP",
+						"value": "{{otpCode}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://api.github.com/repos/:owner/:repo",
+					"protocol": "https",
+					"host": [
+						"api",
+						"github",
+						"com"
+					],
+					"path": [
+						"repos",
+						":owner",
+						":repo"
+					],
+					"variable": [
+						{
+							"key": "owner",
+							"value": "{{gitUserName}}"
+						},
+						{
+							"key": "repo",
+							"value": "{{repo}}"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
