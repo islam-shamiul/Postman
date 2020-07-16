@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Passing Postman collection" tests="4" time="1.358">
+  <testsuite name="GET with URL Params" id="5e5152b1-ecda-4180-9178-e73962dc4e69" timestamp="2020-05-08T04:56:20.988Z" tests="2" failures="1" errors="0" time="0.595">
+    <testcase name="Status code is 200" time="0.595" classname="PassingPostmanCollection">
+      <failure type="AssertionFailure" message="expected response to have status code 201 but got 200">
+        <![CDATA[Failed 1 times.]]>
+        <![CDATA[Collection JSON ID: 7e582139-4618-458c-9ac2-47789d84435e.]]>
+        <![CDATA[Collection name: Passing Postman collection.]]>
+        <![CDATA[Request name: GET with URL Params.]]>
+        <![CDATA[Test description: Status code is 200.]]>
+        <![CDATA[Error message: expected response to have status code 201 but got 200.]]>
+        <![CDATA[Stacktrace: AssertionError: expected response to have status code 201 but got 200
+   at Object.eval sandbox-script.js:1:1).]]>
+      </failure>
+    </testcase>
+    <testcase name="Response contains params" time="0.595" classname="PassingPostmanCollection"/>
+  </testsuite>
+  <testsuite name="POST with JSON body" id="0d471b04-a838-457f-9642-ed790ff08b53" timestamp="2020-05-08T04:56:20.988Z" tests="2" failures="0" errors="0" time="0.256">
+    <testcase name="Status code is 200" time="0.256" classname="PassingPostmanCollection"/>
+    <testcase name="Check POST param in response" time="0.256" classname="PassingPostmanCollection"/>
+  </testsuite>
+  <testsuite name="DELETE request" id="b3e85314-fe55-4518-a77e-98bbc2defed6" timestamp="2020-05-08T04:56:20.988Z" tests="1" failures="0" errors="0" time="0.254">
+    <testcase name="Status code is 200" time="0.254" classname="PassingPostmanCollection"/>
+  </testsuite>
+  <testsuite name="PUT with form data" id="355388d1-51d4-45df-95b5-83453ad018bd" timestamp="2020-05-08T04:56:20.988Z" tests="2" failures="0" errors="0" time="0.253">
+    <testcase name="Status code is 200" time="0.253" classname="PassingPostmanCollection"/>
+    <testcase name="Test form data" time="0.253" classname="PassingPostmanCollection"/>
+  </testsuite>
+</testsuites>
