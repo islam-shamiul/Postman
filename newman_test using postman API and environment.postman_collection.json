@@ -1,0 +1,146 @@
+{
+	"info": {
+		"_postman_id": "eb9050d2-692f-424f-a979-40705e3d5755",
+		"name": "newman_test using postman API and environment",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "All postman collection List",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.getpostman.com/collections?apikey=PMAK-5eb0b9bdb79d2001cdeb5ed0-92d5e9cc721349c254da4639201adb4602",
+					"protocol": "https",
+					"host": [
+						"api",
+						"getpostman",
+						"com"
+					],
+					"path": [
+						"collections"
+					],
+					"query": [
+						{
+							"key": "apikey",
+							"value": "PMAK-5eb0b9bdb79d2001cdeb5ed0-92d5e9cc721349c254da4639201adb4602",
+							"description": "put the api key"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get the collection",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.getpostman.com/collections/11299029-eb9050d2-692f-424f-a979-40705e3d5755?apikey=PMAK-5eb0b9bdb79d2001cdeb5ed0-92d5e9cc721349c254da4639201adb4602",
+					"protocol": "https",
+					"host": [
+						"api",
+						"getpostman",
+						"com"
+					],
+					"path": [
+						"collections",
+						"11299029-eb9050d2-692f-424f-a979-40705e3d5755"
+					],
+					"query": [
+						{
+							"key": "apikey",
+							"value": "PMAK-5eb0b9bdb79d2001cdeb5ed0-92d5e9cc721349c254da4639201adb4602"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "environment list",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.getpostman.com/environments?apikey=PMAK-5eb0b9bdb79d2001cdeb5ed0-92d5e9cc721349c254da4639201adb4602",
+					"protocol": "https",
+					"host": [
+						"api",
+						"getpostman",
+						"com"
+					],
+					"path": [
+						"environments"
+					],
+					"query": [
+						{
+							"key": "apikey",
+							"value": "PMAK-5eb0b9bdb79d2001cdeb5ed0-92d5e9cc721349c254da4639201adb4602"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get the specific environment",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.getpostman.com/environments/::uid?apikey=enter the postman api key",
+					"protocol": "https",
+					"host": [
+						"api",
+						"getpostman",
+						"com"
+					],
+					"path": [
+						"environments",
+						"::uid"
+					],
+					"query": [
+						{
+							"key": "apikey",
+							"value": "enter the postman api key"
+						}
+					],
+					"variable": [
+						{
+							"key": ":uid",
+							"value": "enter the specific environment uid"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "httpbin",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/get?lol=true",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"get"
+					],
+					"query": [
+						{
+							"key": "lol",
+							"value": "true"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
