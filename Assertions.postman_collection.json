@@ -1,0 +1,110 @@
+{
+	"info": {
+		"_postman_id": "8141cc88-a988-4ac3-827b-bc661d16d450",
+		"name": "Assertions",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Assertions on arrays",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3c3b5b59-39ca-4fc0-a906-7cdea3dec3a4",
+						"exec": [
+							"const response = pm.response.json()\r",
+							"\r",
+							"\r",
+							"let manufacturer;\r",
+							"\r",
+							"for (let filter of response.filters)\r",
+							"{\r",
+							"    if(filter.name == \"MANUFACTURER\")\r",
+							"    {\r",
+							"        manufacturer = filter;\r",
+							"    }\r",
+							"}\r",
+							"\r",
+							"pm.test(\"MANUFACTURER Is false\", function () {\r",
+							"    pm.expect(manufacturer.isAllowed).to.be.false\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://www.mocky.io/v2/5ab350d62f00005a00ca3663",
+					"protocol": "http",
+					"host": [
+						"www",
+						"mocky",
+						"io"
+					],
+					"path": [
+						"v2",
+						"5ab350d62f00005a00ca3663"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "nested assertions",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4b04e807-d481-4e31-9601-c6349f193183",
+						"exec": [
+							"let responses = pm.response.json();\r",
+							"\r",
+							"console.log(responses.limits);\r",
+							"let boardsStatus;\r",
+							"\r",
+							"for(let key in responses.limits)\r",
+							"{\r",
+							"    if (responses.limits[key].hasOwnProperty('boards'))\r",
+							"    {\r",
+							"        boardsStatus = responses.limits[key].boards.totalPerMember.status;\r",
+							"    }\r",
+							"}\r",
+							"\r",
+							"pm.test(\"Body is correct\", function () {\r",
+							"    \r",
+							"pm.expect(boardsStatus).to.eql(\"ok\")\r",
+							"\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://www.mocky.io/v2/5ab34d8c2f00006600ca3652",
+					"protocol": "http",
+					"host": [
+						"www",
+						"mocky",
+						"io"
+					],
+					"path": [
+						"v2",
+						"5ab34d8c2f00006600ca3652"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
