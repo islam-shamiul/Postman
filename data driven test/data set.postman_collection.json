@@ -1,0 +1,184 @@
+{
+	"info": {
+		"_postman_id": "d4202374-2718-4144-afeb-3874dc13e2b1",
+		"name": "data set",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get uuid",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "7d5e622d-3a6b-4bbd-ae10-4a72df20db54",
+						"exec": [
+							"const response = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Should contain reference id\", function () {\r",
+							"    pm.expect(response.uuid).to.exist;\r",
+							"});\r",
+							"\r",
+							"pm.globals.set(\"uuId\", response.uuid);\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "httpbin.org/uuid",
+					"host": [
+						"httpbin",
+						"org"
+					],
+					"path": [
+						"uuid"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create order",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "bb6e1910-2973-439c-9f5c-4966367aa16c",
+						"exec": [
+							"const response = pm.response.json();\r",
+							"\r",
+							"if (pm.variables.get(\"isValid\")) {\r",
+							"    pm.test(\"Should contain the reference id\", function () {\r",
+							"        pm.expect(response.json.referenceID).to.eql(pm.globals.get(\"uuId\"));\r",
+							"    });\r",
+							"\r",
+							"    pm.test(\"Should contain the customer id\", function () {\r",
+							"        pm.expect(response.json.customerId).to.eql(parseInt(pm.variables.get(\"customerId\")));\r",
+							"    });\r",
+							"\r",
+							"    pm.test(\"Should contain the product id\", function () {\r",
+							"        pm.expect(response.json.productId).to.eql(parseInt(pm.variables.get(\"productId\")));\r",
+							"    });\r",
+							"} \r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"referenceID\": \"{{uuId}}\",\r\n    \"customerId\" : {{customerId}},\r\n    \"productId\"  : {{productId}},\r\n    \"isValid\"    : {{isValid}},\r\n    \"status\": {{status}},\r\n    \"expectedStatus\" : {{expectedStatus}}\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "httpbin.org/post",
+					"host": [
+						"httpbin",
+						"org"
+					],
+					"path": [
+						"post"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get status",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "36c3a8ae-df12-4cd5-a52e-1c57b870baeb",
+						"exec": [
+							"pm.test(\"Status code is \" + + pm.iterationData.get(\"expectedStatus\"), function () {\r",
+							"    pm.response.to.have.status(pm.iterationData.get(\"expectedStatus\"));\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "httpbin.org/status/{{status}}",
+					"host": [
+						"httpbin",
+						"org"
+					],
+					"path": [
+						"status",
+						"{{status}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "8cda71b5-55c7-4994-af33-8dee68436608",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "3c83f848-322e-49fc-ab0c-732a3c2a7ba0",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "7e8e6fe7-87ee-4397-b24a-438908347244",
+			"key": "customerId",
+			"value": "100"
+		},
+		{
+			"id": "234439c9-18f3-491d-b012-5d24e697d6ac",
+			"key": "productId",
+			"value": "200"
+		},
+		{
+			"id": "9c05aa13-1bb1-4b17-8457-1a0dc9bace8c",
+			"key": "isValid",
+			"value": "true"
+		},
+		{
+			"id": "d28f022a-41c6-423c-a0df-4c5925238fef",
+			"key": "status",
+			"value": "200"
+		},
+		{
+			"id": "31c2ff98-ff8f-46f7-9b6a-67dddcc18116",
+			"key": "expectedStatus",
+			"value": "200"
+		}
+	],
+	"protocolProfileBehavior": {}
+}
